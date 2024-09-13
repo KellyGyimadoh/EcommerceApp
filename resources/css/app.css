@@ -1,0 +1,36 @@
+.sb-sidenav-menu-nested .subitem {
+    padding-left: 1rem; /* Adjust the value as needed */
+}
+
+/* Ensure the collapse effect does not add unwanted space */
+.subitem {
+    margin-top:-50px;
+    margin-bottom: 50px;
+
+
+}
+
+/* Style nested nav links if necessary */
+.sb-sidenav-menu-nested .nav-link .subitem {
+    padding-left: 1rem; /* Adjust the value as needed */
+}
+@media print {
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .receipt-container {
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background: #fff;
+    }
+    @page {
+        size: auto; /* Auto is the initial value */
+        margin: 20mm; /* Change margin as per your need */
+    }
+    .no-print {
+        display: none;
+    }
+}
