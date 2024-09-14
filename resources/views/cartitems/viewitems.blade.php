@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="card-header d-flex justify-content-between">
-                <div> <i class="fas fa-table me-1"></i>
+                <div> <i class="bi bi-cart-fill me-1"></i>
                     Cart items
                 </div>
                 <div class="d-flex justify-content-end">

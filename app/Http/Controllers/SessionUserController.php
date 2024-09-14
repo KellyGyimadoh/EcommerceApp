@@ -15,15 +15,48 @@ use Illuminate\Validation\ValidationException;
 use Twilio\Rest\Client;
 class SessionUserController extends Controller
 {
+    public function index()
+    {
+        $users=User::latest()->paginate(6);
+        $totalusers=User::count();
+        return view('user.index',['users'=>$users,'totalusers'=>$totalusers]);
+    }
     public function create(){
         return view('auth.login');
     }
 
+    public function search(Request $request){
+        $userType=$request->input('account_type','all');
+        $item= $request->input('q','all');
+        $totalusers=User::count();
+       $searchQuery= User::query();
+
+       if($userType && $userType!=='all'){
+        $searchQuery->where('account_type',$userType);
+       }
+       if($item && $item!=='all'){
+        $searchQuery->where('firstname','LIKE','%'.$item.'%','OR',
+        'lastname','LIKE','%'.$item.'%');
+       }
+
+       $users= $searchQuery->latest()
+       ->paginate(5)->appends(['account_type'=>$userType,'q'=>$item]);
+
+       return view('user.index',['users'=>$users,'totalusers'=>$totalusers]);
+
+    }
     public function show(User $user){
         if($user){
             return view('user.edit',['user'=>$user]);
         }else{
             return back()->with('error','User not found');
+        }
+    }
+    public function showUser(User $user){
+        if($user){
+            return response()->json(['data'=>$user,'success'=>true]);
+        }else{
+            return response()->json(['data'=>[],'success'=>false]);
         }
     }
     public function update(Request $request,User $user){
@@ -33,7 +66,25 @@ class SessionUserController extends Controller
             'email'=>['email','required', Rule::unique('users')->ignore($user->id)],
             'phone'=>['nullable','max:10'],
             'address'=>['nullable'],
-            'account_type'=>['required','string'],
+            'account_type'=>['required'],
+        ]);
+        if($user){
+            $user->update($validatedData);
+            return back()->with('success','Update Successful');
+        }else{
+            return back()->with('error','Failed to Update. Please try again');
+        }
+    }
+    public function updateUser(Request $request,User $user){
+
+        $validatedData=$request->validate([
+            'firstname'=>['required','max:15'],
+            'lastname'=>['required','max:15'],
+            'email'=>['email','required', Rule::unique('users')->ignore($user->id)],
+            'phone'=>['nullable','max:18'],
+            'address'=>['nullable'],
+            'account_type'=>['required'],
+            'status'=>['required','integer']
         ]);
         if($user){
             $user->update($validatedData);
@@ -100,7 +151,11 @@ class SessionUserController extends Controller
         Auth::logout();
         return redirect('/');
     }
+public function deleteUser(User $user){
+    $action= $user->deleteOrFail();
 
+    return $action ? back()->with('success','User Removed Successfully'):back()->with('error','Failed to Remove User. Try Again..');
+}
     private function sendsmscode($phone)
     {
         // Find your Account SID and Auth Token at twilio.com/console

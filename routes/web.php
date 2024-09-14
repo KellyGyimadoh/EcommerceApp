@@ -47,8 +47,14 @@ Route::post('/dasboard',[DashboardController::class,'store']);
 
 Route::get('/logout',[SessionUserController::class,'destroy']);
 //user
+Route::get('/users',[SessionUserController::class,'index']);
+Route::get('/users-add',[SessionUserController::class,'create']);
+Route::get('/searchusers',[SessionUserController::class,'search']);
 Route::get('/user/{user}',[SessionUserController::class,'show']);
+Route::get('/users/{user}',[SessionUserController::class,'showUser']);
+Route::patch('/users/{user}',[SessionUserController::class,'updateUser']);
 Route::patch('/user/{user}',[SessionUserController::class,'update']);
+Route::delete('/users/{user}',[SessionUserController::class,'deleteUser']);
 Route::patch('/user-password/{user}',[SessionUserController::class,'updatePassword']);
 //categories
 Route::get('/categories',[CategoriesController::class,'index']);

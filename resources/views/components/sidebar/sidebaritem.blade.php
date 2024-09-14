@@ -24,6 +24,16 @@
                                     Product</x-sidebar.sidebarlink>
                             </x-sidebar.subitem>
                         </x-sidebar.sidemenu>
+                        <x-sidebar.sideheader header='Customers' />
+                        <x-sidebar.sidemenu href="#" :collapsed="true" target='collapseCusts' item='Manage Customers'
+                            icon='bi bi-people-fill'>
+                            <x-sidebar.subitem id="collapseCusts">
+                                <x-sidebar.sidebarlink href="/users" class="nav-link">View
+                                    All Customers</x-sidebar.sidebarlink>
+                                <x-sidebar.sidebarlink href="/users-add" class="nav-link">Add new
+                                    Customer</x-sidebar.sidebarlink>
+                            </x-sidebar.subitem>
+                        </x-sidebar.sidemenu>
                     @endcan
                 <x-sidebar.sideheader header='View Catalog/Buy Items' />
                 <x-sidebar.sidemenu href="#" :collapsed="true" target='collapseCatalog' item='View Catalog'

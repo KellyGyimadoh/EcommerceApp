@@ -32,7 +32,7 @@
                             <h5 class="card-title text-center">{{ strtoupper($product->name) }}</h5>
                             <p class="card-text fw-bold text-warning text-center">GH&#8373;{{ $product->price }}</p>
                             @if ($product->stock_quantity <= 0)
-                                <p class="card-text text-danger">Out Of Stock</p>
+                                <p class="card-text text-danger text-center">Out Of Stock</p>
                             @else
                                 <p class="card-text text-center">Available: {{ $product->stock_quantity }}</p>
 

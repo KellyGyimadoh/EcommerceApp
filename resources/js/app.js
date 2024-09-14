@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const deleteOrderButtons = document.querySelectorAll('[data-bs-target="#deleteorder"]');
     const editcartproductform = document.getElementById("editcartproductform");
     const printReceiptButton= document.getElementById("printreceipt");
+    const editUserButtons = document.querySelectorAll('[data-bs-target="#edituser"]');
+    const deleteUserButtons = document.querySelectorAll('[data-bs-target="#deleteuser"]');
 
     // if (printReceiptButton) {
     //     printReceiptButton.addEventListener("click", function() {
@@ -98,6 +100,15 @@ setTimeout(() => {
 const editOrderMappings={
     'shipping_address':'shipping_address'
 }
+const editUserMappings={
+    'firstname':'firstname',
+    'lastname':'lastname',
+    'email':'email',
+    'phone':'phone',
+    'status':'status',
+    'address':'address',
+    'account_type':'account_type'
+}
     // Set up edit and delete forms
     setupFormActions(editCategoryButtons, '#editform', '/categories', 'edit', editCategoryFieldMappings);
     setupFormActions(deleteCategoryButtons, '#deleteform', '/categories', 'delete');
@@ -114,6 +125,10 @@ const editOrderMappings={
 setupFormActions(editOrderButtons, '#editorderform', '/orders', 'edit', editOrderMappings);
 setupFormActions(deleteOrderButtons, '#deleteorderform', '/orders', 'delete');
 
+//for users
+setupFormActions(editUserButtons, '#edituserform', '/users', 'edit', editUserMappings);
+setupFormActions(deleteUserButtons, '#deleteuserform', '/users', 'delete');
+
     const submitEditButton = document.querySelector("#submit-form");
     if(submitEditButton){
     submitEditButton.addEventListener('click', () => {
@@ -125,6 +140,8 @@ setupFormActions(deleteOrderButtons, '#deleteorderform', '/orders', 'delete');
         const deletecartitemform = document.querySelector("#deletecartitemform");
         const editorderform = document.querySelector("#editorderform");
         const deleteorderform = document.querySelector("#deleteorderform");
+        const edituserform = document.querySelector("#edituserform");
+        const deleteuserform = document.querySelector("#deleteuserform");
 
 
         if (editForm) {
@@ -146,6 +163,10 @@ setupFormActions(deleteOrderButtons, '#deleteorderform', '/orders', 'delete');
         }
         else if (deleteorderform) {
             deleteorderform.submit();
+        }else if(deleteuserform){
+            deleteuserform.submit()
+        }else if(edituserform){
+            edituserform.submit()
         }
     });
 }
