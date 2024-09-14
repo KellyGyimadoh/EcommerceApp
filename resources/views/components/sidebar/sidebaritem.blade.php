@@ -2,12 +2,12 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-            <x-sidebar.sidemenu href="/dashboard" :collapsed="false" item='Dashboard' icon='fas fa-tachometer-alt'/>
+            <x-sidebar.sidemenu href="/dashboard" :collapsed="false" item='Home Catalogue' icon='bi bi-house-add-fill'/>
 
                     @can('viewAny', 'App\\Models\User')
                         <x-sidebar.sideheader header='Product/Category' />
                         <x-sidebar.sidemenu href="#" :collapsed="true" target='collapseLayouts' item='Manage Category'
-                            icon='fas fa-columns'>
+                            icon='bi bi-list-stars'>
                             <x-sidebar.subitem id="collapseLayouts">
                                 <x-sidebar.sidebarlink href="/categories" class="nav-link">View
                                     Categories</x-sidebar.sidebarlink>
@@ -16,7 +16,7 @@
                             </x-sidebar.subitem>
                         </x-sidebar.sidemenu>
                         <x-sidebar.sidemenu href="#" :collapsed="true" target='collapseProducts' item='Manage Product'
-                            icon='fas fa-columns'>
+                            icon='bi bi-bag-x-fill'>
                             <x-sidebar.subitem id="collapseProducts">
                                 <x-sidebar.sidebarlink href="/products" class="nav-link">View
                                     Products</x-sidebar.sidebarlink>
@@ -27,7 +27,7 @@
                     @endcan
                 <x-sidebar.sideheader header='View Catalog/Buy Items' />
                 <x-sidebar.sidemenu href="#" :collapsed="true" target='collapseCatalog' item='View Catalog'
-                    icon='fas fa-columns'>
+                    icon='bi bi-cart-fill'>
                     <x-sidebar.subitem id="collapseCatalog">
                         <x-sidebar.sidebarlink href="/add-carts" class="nav-link">Buy Items</x-sidebar.sidebarlink>
                         @if (session('cartid'))
@@ -39,7 +39,7 @@
                 </x-sidebar.sidemenu>
                 <x-sidebar.sideheader header='Orders' />
                 <x-sidebar.sidemenu href="#" :collapsed="true" target='collapseOrders' item='Manage Orders'
-                    icon='fas fa-columns'>
+                    icon='bi bi-building-add'>
                     <x-sidebar.subitem id="collapseOrders">
 
                         <x-sidebar.sidebarlink href="/orders" class="nav-link">View My Orders</x-sidebar.sidebarlink>

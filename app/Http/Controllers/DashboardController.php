@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $cartid= $cart? $cart->id :null;
         session(['cartid' => $cartid]);
         $cartTotalItems = CartItems::where('cart_id', $cartid)->sum('quantity');
-
+        session(['totalCartItems'=>$cartTotalItems]);
         return view('home',['products'=>$products,'totalItems'=>$cartTotalItems]);
     }
 

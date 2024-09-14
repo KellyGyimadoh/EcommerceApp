@@ -26,7 +26,14 @@ class OrdersController extends Controller
 
         return view('orders.index',['orders'=>$orders,'user'=>$user,'totalorders'=>$totalorders,'orderitems'=>'']);
     }
-
+public function completeOrder(Orders $orders){
+    $action=$orders->update(['order_status'=>3]);
+    if($action){
+    return back()->with('success','order Completed');
+    }else{
+        return back()->with('error','failed to complete.. try again');
+    }
+}
     /**
      * Show the form for creating a new resource.
      */

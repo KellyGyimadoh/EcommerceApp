@@ -29,7 +29,7 @@ class UpdateProductsRequest extends FormRequest
             'status'=>['nullable'],
             'price'=>['required'],
             'stock_quantity'=>['required'],
-            'image'=>['image','nullable']
+            'image'=>['nullable',]
         ];
     }
 }

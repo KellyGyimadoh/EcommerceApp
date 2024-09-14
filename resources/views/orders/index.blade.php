@@ -138,11 +138,22 @@
                                                 class="btn btn-sm btn-success">Make Payment</a>
                                         </div>
                                         @endif
+                                        @if($order->payment_status==0)
                                         <div class=" ms-2">
                                             <a role="button" data-bs-toggle="modal" data-bs-target="#editorder"
                                                 class="btn btn-dark text-wrap" data-id="{{ $order->id }}">Edit</a>
 
                                         </div>
+                                        @else
+                                        @if($order->order_status==1)
+                                        <div class=" ms-2">
+                                            <a role="button" class="btn btn-outline-success text-dark" href="/completeorder/{{$order->id}}" >Complete Order</a>
+
+                                        </div>
+                                        @else
+                                        <button class="btn btn-success">Completed</button>
+                                        @endif
+                                        @endif
                                         <div class=" ms-2"><a role="button" data-bs-toggle="modal"
                                                 data-bs-target="#deleteorder" class="btn btn-danger"
                                                 data-id="{{ $order->id }}">Delete</a>

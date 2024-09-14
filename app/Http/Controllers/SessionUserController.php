@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItems;
+use App\Models\Carts;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +74,12 @@ class SessionUserController extends Controller
 
         $request->session()->regenerate();
         $user= Auth::user();
+        $products=Products::with('category')->get();
+
+        $cart=Carts::where('user_id',$user->id)->first();
+        $cartid= $cart? $cart->id :null;
+        session(['cartid' => $cartid]);
+        $cartTotalItems = CartItems::where('cart_id', $cartid)->sum('quantity');
 
         if ($user->phone) {
             // Send SMS code
@@ -79,7 +88,9 @@ class SessionUserController extends Controller
             // Redirect to the SMS verification page
             return redirect()->route('sms.verifyform');
         } else {
-            return redirect('/dashboard')->with(['success' => 'Login successful', 'user' => $user]);
+            return redirect('/dashboard')->with(['success' => 'Login successful', 'user' => $user,
+            'products'=>$products,'totalItems'=>$cartTotalItems
+        ]);
         }
 
     }

@@ -125,9 +125,13 @@
                     </x-forms.form>
                 </x-modal>
             @endif
-
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="submit" form="deleteallproduct" class="btn btn-danger">Delete all</button>
+                </div>
         </div>
 
-
+<x-forms.form action="/deleteall-products" id="deleteallproduct" method="POST" hidden>
+@method("DELETE")
+</x-forms.form>
 
 </x-layout>

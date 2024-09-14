@@ -136,4 +136,14 @@ class ProductsController extends Controller
         return $action ? back()->with('success','product removed successfully'):
         back()->with('error','failed to remove try again..');
     }
+
+    public function destroyAll()
+    {
+        $action=Products::query()->delete();
+        if($action){
+            return back()->with('success','All Products removed');
+        }else{
+            return back()->with('error',"failed to execute. try again");
+        }
+    }
 }

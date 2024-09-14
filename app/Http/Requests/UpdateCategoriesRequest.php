@@ -22,7 +22,7 @@ class UpdateCategoriesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','unique:categories,name,'],
+            'name'=>['required','distinct'],
             'description'=>['nullable']
         ];
     }

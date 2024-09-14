@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CartItemsController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CategoriesController;
@@ -65,6 +66,7 @@ Route::get('/products/{products}',[ProductsController::class,'show']);
 Route::get('/searchproducts',[ProductsController::class,'search']);
 Route::patch('/products/{products}',[ProductsController::class,'update']);
 Route::delete('/products/{products}',[ProductsController::class,'destroy']);
+Route::delete('/deleteall-products',[ProductsController::class,'destroyAll']);
 Route::get('/products-add',[ProductsController::class,'create']);
 Route::post('/products-add',[ProductsController::class,'store']);
 
@@ -76,6 +78,7 @@ Route::post('/orders',[OrdersController::class,'store']);
 Route::delete('/orders/{orders}',[OrdersController::class,'destroy'])->name('orders.delete');
 Route::patch('/orders/{orders}',[OrdersController::class,'update'])->name('orders.update');
 Route::get('/orders',[OrdersController::class,'index'])->name('orders.index');
+Route::get('/completeorder/{orders}',[OrdersController::class,'completeOrder']);
 Route::get('/order/success',[OrdersController::class,'success'])->name('order.success');
 Route::get('/order/cancel',[OrdersController::class,'cancel'])->name('order.cancel');
 
@@ -89,7 +92,8 @@ Route::post('/add-carts',[CartsController::class,'store'])->name('carts.add-cart
 Route::get('/searchcartproducts',[CartsController::class,'search']);
 Route::delete('/carts/{carts}',[CartsController::class,'destroy']);
 
-//dasboard
+//activity
+Route::get('/activity',[ActivityController::class,'index']);
 
 //cartitems
 Route::get('/cartitems/{cartid}',[CartItemsController::class,'viewCartItems'])->name('cartitems.view');
